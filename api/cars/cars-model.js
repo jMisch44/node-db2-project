@@ -5,16 +5,28 @@ const getAll = () => {
 }
 
 const getById = async (id) => {
-  return await db('cars').where('id', id).first()
+  return await db('cars').where('id', id).first();
 }
 
 const create = async (car) => {
-  const id = await db('cars').insert(car)
-  return await getById(id)
+  const id = await db('cars').insert(car);
+  return await getById(id);
+}
+
+const update = () => {
+  // update
+}
+
+const remove = async (id) => {
+  const car = await getById(id);
+  await db('cars').where('id', id).delete();
+  return car;
 }
 
 module.exports = {
   getAll,
   getById,
   create,
+  update,
+  remove,
 }

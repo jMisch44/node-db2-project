@@ -33,4 +33,13 @@ async (req, res, next) => {
     }
 })
 
+router.delete('/:id', checkCarId, async (req, res, next) => {
+    try {
+        const deletedCar = await Cars.remove(req.params.id)
+        res.status(200).json(deletedCar)
+    } catch (err) {
+        next(err)
+    }
+})
+
 module.exports = router
