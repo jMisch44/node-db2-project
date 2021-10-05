@@ -25,9 +25,9 @@ router.post(
 checkCarPayload, 
 checkVinNumberValid, 
 checkVinNumberUnique, 
-(req, res, next) => {
+async (req, res, next) => {
     try {
-        res.json('create new car')
+        res.status(201).json(await Cars.create(req.body))
     } catch (err) {
         next(err)
     }
