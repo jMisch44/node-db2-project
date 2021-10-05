@@ -20,27 +20,30 @@ const checkCarId = async (req, res, next) => {
 
 const checkCarPayload = (req, res, next) => {
   const { vin, make, model, mileage } = req.body;
-  if(vin === undefined) {
+  if(vin === undefined || typeof vin !== "string") {
     next({
       status: 400,
       message: `vin is missing` 
     })
-  } else if(make  === undefined) {
+  } else if(make  === undefined || typeof make !== "string") {
     next({
       status: 400,
       message: `make is missing` 
     })
-  } else if(model === undefined) {
+  } else if(model === undefined || typeof model !== "string") {
     next({
       status: 400,
       message: `model is missing` 
     })
-  } else if (mileage === undefined) {
+  } else if (mileage === undefined || typeof mileage !== "number") {
     next({
       status: 400,
       message: `mileage is missing` 
     })
   } else {
+    req.body.vin = vin.trim()
+    req.body.make = make.trim()
+    req.body.model = model.trim()
     next()
   }
 }
