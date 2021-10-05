@@ -1,9 +1,10 @@
 const express = require('express')
+const Car = require('./cars-model.js')
 const router = express.Router()
 
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
-        res.json('get cars')
+        res.json(await Car.getAll())
     } catch (err) {
         next(err)
     }
