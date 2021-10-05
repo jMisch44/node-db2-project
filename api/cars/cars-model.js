@@ -13,8 +13,9 @@ const create = async (car) => {
   return await getById(id);
 }
 
-const update = () => {
-  // update
+const update = async (id, updatedCar) => {
+  await db('cars').where("id", id).update(updatedCar)
+  return await getById(id)
 }
 
 const remove = async (id) => {

@@ -33,6 +33,20 @@ async (req, res, next) => {
     }
 })
 
+router.put(
+    '/:id', 
+    checkCarId, 
+    checkCarPayload, 
+    checkVinNumberValid, 
+    async (req,res,next) => {
+    try {
+        const updatedCar = await Cars.update(req.params.id, req.body)
+        res.status(200).json(updatedCar)
+    } catch (err) {
+        next(err)
+    }
+})
+
 router.delete('/:id', checkCarId, async (req, res, next) => {
     try {
         const deletedCar = await Cars.remove(req.params.id)
