@@ -16,11 +16,16 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/:id', checkCarId, (req, res, next) => {
+router.get('/:id', checkCarId, (req, res) => {
     res.status(200).json(req.car)
 })
 
-router.post('/', (req, res, next) => {
+router.post(
+'/', 
+checkCarPayload, 
+checkVinNumberValid, 
+checkVinNumberUnique, 
+(req, res, next) => {
     try {
         res.json('create new car')
     } catch (err) {
